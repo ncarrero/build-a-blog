@@ -4,16 +4,17 @@
 
 <h1>Add a New Post</h1>
 <form action='/newpost' method='post'>
-    <p class='error'>{{error}}</p>
     <label>
     New Title:
     <input type='text' name="title" value="{{ title }}">
     </label>
+    <p class='error'>{{title_error}}</p>
     <br>
     <label for="body">New Blog Post: </label>
     <br>
     <textarea id='body' name='body' value="{{body}}" rows='5' cols='30'>
     </textarea>
+    <p class='error'>{{body_error}}</p>
     <input type='hidden' name="id" value="{{ id }}">
     <br>
     <input type='submit' value='Add Post'>

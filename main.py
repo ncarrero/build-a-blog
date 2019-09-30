@@ -85,7 +85,6 @@ def logout():
     del session['email']
     return redirect('/login')
 
-#TODO: return blog post using query parameter
 @app.route('/blog', methods=['GET'])
 def blog():
     owner = User.query.filter_by(email=session['email']).first()
@@ -102,17 +101,22 @@ def blog():
 @app.route('/newpost', methods=['GET', 'POST'])
 def newpost():
     owner = User.query.filter_by(email=session['email']).first()
+    
     if request.method == 'POST':
         id = request.form['id']
         post = Blog.query.get(id)
         title = request.form['title']
         body = request.form['body']
+        title_error = ''
+        body_error = ''
 
         #TODO: keep text that user put in but show error messsage where empty.
-        if (title.strip() == "") or (body.strip() == ""):
-            error = 'Please complete all fields.'
-            return render_template('newpost.html', heading='New Post', error=error)
-
+        if title.strip() == "":
+            title_error = 'Please create a title.'
+            return render_template('newpost.html', heading='New Post', title_error=title_error, body_error=body_error, id=id, title=title, body=body)
+        if body.strip() == "":
+            body_error = 'Please write something for your blog post.'
+            return render_template('newpost.html', heading='New Post', title_error=title_error, body_error=body_error, id=id, title=title, body=body)
         else:
             new_post = Blog(title, body, owner)
             db.session.add(new_post)
