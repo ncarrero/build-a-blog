@@ -14,8 +14,10 @@
     </head>
 <body>
     <div>
-    <!--TODO: only display log out button when user is signed in: see get it done app code-->
+    {% if 'user' in session %}
+        {{ session['user'] }}
     <a href='/logout'>Log Out</a>
+    {% endif %}
     <a href='/blog'>Blog Posts</a>
     <a href='/newpost'>Create a New Post</a>
     </div>
