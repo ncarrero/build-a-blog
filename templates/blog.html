@@ -5,6 +5,8 @@
 {% if blog_list|length == 0 %}
     <p>No posts yet.</p>
 {% endif %}
+
+
 {% if not id %}
     {% for post in blog_list %}
         <ol>
@@ -13,6 +15,8 @@
         </ol>
     {% endfor %}
 {% endif %}
+
+
 {% if id %}
     <h2>{{ post.title }}</h2>
     <p>{{ post.body }}</p>
